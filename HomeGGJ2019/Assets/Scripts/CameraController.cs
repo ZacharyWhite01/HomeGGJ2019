@@ -6,6 +6,7 @@ public class CameraController : MonoBehaviour
 {
     public Transform target;
     public Vector3 offset;
+    bool canSee = false;
 
     public float zoomSpeed = 4f;
     public float minZoom = 5f;
@@ -24,6 +25,16 @@ public class CameraController : MonoBehaviour
         currentZoom = Mathf.Clamp(currentZoom, minZoom, maxZoom);
 
         currentYaw -= Input.GetAxis("Horizontal") * yawSpeed * Time.deltaTime;
+        if (target.position.z <= 187f && !canSee)
+        {
+            Camera.main.cullingMask = Camera.main.cullingMask ^ (1 << 11);
+            canSee = true;
+        }
+        else
+        {
+            Camera.main.cullingMask = Camera.main.cullingMask ^ (1 << 11);
+            canSee = false;
+        }
     }
 
     // Update is called once per frame

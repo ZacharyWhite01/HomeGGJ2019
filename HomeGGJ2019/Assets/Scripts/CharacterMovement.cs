@@ -18,13 +18,13 @@ public class CharacterMovement : MonoBehaviour
     {
         cam = Camera.main;
         agent = GetComponent<NavMeshAgent>();
-
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -32,13 +32,17 @@ public class CharacterMovement : MonoBehaviour
             {
                 destination = hit.point;
                 agent.SetDestination(destination);
-                anim.SetTrigger("Walking");
-
             }
         }
-        if (destination != null && transform.position == destination)
+        if (agent.remainingDistance <= agent.stoppingDistance)
         {
-            anim.SetTrigger("Standing");
+            isWalking = false;
+
         }
+        else
+        {
+            isWalking = true;
+        }
+        anim.SetBool("Walking", isWalking);
     }
 }
