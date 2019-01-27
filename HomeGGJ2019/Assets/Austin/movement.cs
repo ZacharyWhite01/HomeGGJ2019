@@ -17,7 +17,6 @@ public class movement : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         GameObject landscape = GameObject.Find("Terrain");
         terrain = landscape.GetComponent<Terrain>();
-        Debug.Log(terrain.terrainData.bounds.size);
         mainPlayer = GameObject.Find("Player");
 
     }
@@ -27,7 +26,7 @@ public class movement : MonoBehaviour
     void Update()
     {
         double distance = Vector3.Distance(transform.position, mainPlayer.transform.position);
-        Debug.Log(distance);
+
         if (distance <= 10)
         {
             for (x = 0; x < followChain.Length; x++)
@@ -35,10 +34,12 @@ public class movement : MonoBehaviour
                 if (x == 0)
                 {
                     agent.SetDestination(mainPlayer.transform.position + new Vector3(-1, 0, 0));
+                    transform.LookAt(mainPlayer.transform.position);
                 }
                 else
                 {
                     agent.SetDestination(followChain[x - 1].transform.position + new Vector3(-1, 0, 0));
+                    transform.LookAt(agent.destination);
                 }
             }
         }
@@ -48,15 +49,14 @@ public class movement : MonoBehaviour
             if (i <= 0.0f)
             {
                 i = 1.0f;
-                Debug.Log("A");
                 if (i2 == 0)
                 {
                     i2 = 5;
-                    Vector3 three = new Vector3(Random.Range(terrain.terrainData.bounds.min.x, terrain.terrainData.bounds.max.x),
-    0, Random.Range(terrain.terrainData.bounds.min.z, terrain.terrainData.bounds.max.z));
+                    Vector3 three = new Vector3(Random.Range(terrain.terrainData.bounds.min.x, terrain.terrainData.bounds.max.x), 0 , Random.Range(terrain.terrainData.bounds.min.z, terrain.terrainData.bounds.max.z));
 
 
                     agent.SetDestination(three);
+                    transform.LookAt(three);
                 }
 
                 i2--;

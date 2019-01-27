@@ -37,10 +37,7 @@ public class CharacterMovement : MonoBehaviour
                 if (agent.enabled == false)
                 {
                     agent.enabled = true;
-                    agent.isStopped = false;
-                    agent.SetDestination(transform.position);
                     GetComponent<Rigidbody>().isKinematic = true;
-                    agent.isStopped = false;
                 }
 
                 if (Input.GetMouseButtonDown(0))
@@ -68,6 +65,7 @@ public class CharacterMovement : MonoBehaviour
                 if (agent.enabled)
                 {
                     agent.isStopped = true;
+                    agent.ResetPath();
                     agent.enabled = false;
                 }
                 Vector3 pos = transform.position;
@@ -91,7 +89,6 @@ public class CharacterMovement : MonoBehaviour
 
     public void detectCam()
     {
-
         if (mainCamera.firstPersonCamera.gameObject.activeSelf == true)
         {
             firstPerson = true;
