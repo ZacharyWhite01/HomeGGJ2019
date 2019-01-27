@@ -6,7 +6,7 @@ using UnityEngine;
 public class SeasonTerrain : MonoBehaviour
 {
     Projector projector;
-    float maxClipPlane = 30f;
+    float maxClipPlane = 100f;
     float minClipPlane = 0.02f;
 
     public SeasonManager seasonManager;

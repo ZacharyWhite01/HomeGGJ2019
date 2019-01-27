@@ -32,7 +32,7 @@ public class CameraController : MonoBehaviour
 
     float rotationX = 0f;
     float rotationY = 0f;
-
+    
     public CharacterMovement charMovement;
 
     // Start is called before the first frame update

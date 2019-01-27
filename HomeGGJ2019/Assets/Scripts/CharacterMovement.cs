@@ -14,7 +14,7 @@ public class CharacterMovement : MonoBehaviour
 
     bool isWalking = false;
     bool firstPerson = false;
-    public int speed = 100;
+    public int speed = 250;
 
     Vector3 moveDirection;
 
@@ -78,7 +78,7 @@ public class CharacterMovement : MonoBehaviour
                 moveDirection = (horizontalMovement * transform.right + verticleMovement * transform.forward).normalized;
 
                 GetComponent<Rigidbody>().isKinematic = false;
-
+                isWalking = true;
                 Move();
             }
             anim.SetBool("Walking", isWalking);
@@ -110,5 +110,6 @@ public class CharacterMovement : MonoBehaviour
         Vector3 yVelocity = new Vector3(0, rb.velocity.y, 0);
         rb.velocity = moveDirection * speed * Time.deltaTime;
         rb.velocity += yVelocity;
+        isWalking = false;
     }
 }
